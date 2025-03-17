@@ -1,17 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advanced Typing Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        :root {
+        /* Using the same styles from before, but with some improvements */
+        /* Theme Variables */
+        .theme-default {
             --bg-color: #232427;
             --primary-color: #323437;
             --text-color: #e2b714;
             --correct-color: #43a047;
             --incorrect-color: #e91e63;
             --inactive-color: #646669;
+            --font-color: #ffffff;
+        }
+
+        .theme-light {
+            --bg-color: #ffffff;
+            --primary-color: #f0f2f5;
+            --text-color: #2c3e50;
+            --correct-color: #27ae60;
+            --incorrect-color: #e74c3c;
+            --inactive-color: #95a5a6;
+            --font-color: #2c3e50;
+        }
+
+        .theme-matrix {
+            --bg-color: #000000;
+            --primary-color: #0a0a0a;
+            --text-color: #00ff00;
+            --correct-color: #00cc00;
+            --incorrect-color: #ff0000;
+            --inactive-color: #003300;
+            --font-color: #00ff00;
         }
 
         * {
@@ -23,12 +48,13 @@
 
         body {
             background-color: var(--bg-color);
-            color: #ffffff;
+            color: var(--font-color);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 2rem;
+            transition: all 0.3s ease;
         }
 
         .header {
@@ -53,6 +79,13 @@
             border-radius: 5px;
             cursor: pointer;
             transition: 0.3s;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .setting-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .type-container {
@@ -63,17 +96,39 @@
             border-radius: 10px;
             margin-bottom: 2rem;
             position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .words {
             font-size: 1.5rem;
-            line-height: 1.5;
+            line-height: 1.8;
             color: var(--inactive-color);
+            min-height: 150px;
         }
 
         .word {
             margin-right: 8px;
             display: inline-block;
+            position: relative;
+        }
+
+        .word.active {
+            color: var(--text-color);
+        }
+
+        .word.active .letter.current {
+            position: relative;
+        }
+
+        .word.active .letter.current::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-color);
+            animation: blink 1s infinite;
         }
 
         .letter {
@@ -91,21 +146,16 @@
             border-radius: 2px;
         }
 
-        .letter.active {
-            animation: blink 1s infinite;
-        }
-
-        .cursor {
-            position: absolute;
-            width: 2px;
-            height: 1.5em;
-            background-color: var(--text-color);
-            animation: blink 1s infinite;
-        }
-
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
         }
 
         .stats {
@@ -114,6 +164,7 @@
             justify-content: center;
             font-size: 1.2rem;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
         .stat {
@@ -121,35 +172,48 @@
             flex-direction: column;
             align-items: center;
             background: var(--primary-color);
-            padding: 1rem 2rem;
+            padding: 1.5rem 2rem;
             border-radius: 10px;
-            min-width: 150px;
+            min-width: 180px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
         }
 
         .stat-value {
             color: var(--text-color);
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: bold;
         }
 
         .stat-label {
             color: var(--inactive-color);
             margin-top: 0.5rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .restart-btn {
             background: var(--text-color);
             color: var(--bg-color);
             border: none;
-            padding: 1rem 2rem;
+            padding: 1rem 2.5rem;
             border-radius: 5px;
             font-size: 1.2rem;
             cursor: pointer;
             transition: 0.3s;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .restart-btn:hover {
             transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .result-modal {
@@ -159,14 +223,43 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: var(--primary-color);
-            padding: 2rem;
-            border-radius: 10px;
+            padding: 3rem;
+            border-radius: 15px;
             z-index: 1000;
             text-align: center;
+            min-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .result-modal.active {
-            display: block;
+        .result-modal h2 {
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .final-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .final-stat {
+            background: var(--bg-color);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .final-stat h3 {
+            color: var(--inactive-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .final-stat p {
+            color: var(--text-color);
+            font-size: 1.8rem;
+            font-weight: bold;
         }
 
         .overlay {
@@ -176,30 +269,93 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             z-index: 999;
+            backdrop-filter: blur(5px);
         }
 
+        .result-modal.active,
         .overlay.active {
             display: block;
         }
+
+        /* Theme selector dropdown */
+        .theme-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .theme-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--primary-color);
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            min-width: 150px;
+        }
+
+        .theme-option {
+            padding: 0.8rem 1.2rem;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: 0.2s;
+        }
+
+        .theme-option:hover {
+            background: var(--bg-color);
+        }
+
+        .theme-dropdown:hover .theme-options {
+            display: block;
+        }
+
+        /* Additional styles for better word visibility */
+        .word {
+            margin-right: 8px;
+            display: inline-block;
+            position: relative;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .word.active {
+            background-color: rgba(226, 183, 20, 0.1);
+        }
+
+        .letter.current {
+            border-left: 2px solid var(--text-color);
+            animation: blink 1s infinite;
+        }
     </style>
 </head>
-<body>
+
+<body class="theme-default">
+    <!-- Header Section -->
     <div class="header">
         <h1>Advanced Typing Test</h1>
         <div class="settings">
             <button class="setting-btn" id="timeSelect">Time: 30s</button>
-            <button class="setting-btn" id="themeSelect">Theme</button>
+            <div class="theme-dropdown">
+                <button class="setting-btn" id="themeSelect">Theme</button>
+                <div class="theme-options">
+                    <div class="theme-option" data-theme="default">Default</div>
+                    <div class="theme-option" data-theme="light">Light</div>
+                    <div class="theme-option" data-theme="matrix">Matrix</div>
+                </div>
+            </div>
             <button class="setting-btn" id="modeSelect">Mode: Words</button>
         </div>
     </div>
 
+    <!-- Typing Area -->
     <div class="type-container">
         <div class="words" id="words"></div>
-        <div class="cursor" id="cursor"></div>
     </div>
 
+    <!-- Statistics -->
     <div class="stats">
         <div class="stat">
             <div class="stat-value" id="wpm">0</div>
@@ -217,10 +373,28 @@
 
     <button class="restart-btn" id="restart">Restart Test</button>
 
+    <!-- Results Modal -->
     <div class="overlay" id="overlay"></div>
     <div class="result-modal" id="resultModal">
         <h2>Test Complete!</h2>
-        <div class="final-stats"></div>
+        <div class="final-stats">
+            <div class="final-stat">
+                <h3>WPM</h3>
+                <p id="finalWpm">0</p>
+            </div>
+            <div class="final-stat">
+                <h3>Accuracy</h3>
+                <p id="finalAccuracy">0%</p>
+            </div>
+            <div class="final-stat">
+                <h3>Characters</h3>
+                <p id="finalChars">0</p>
+            </div>
+            <div class="final-stat">
+                <h3>Time</h3>
+                <p id="finalTime">30s</p>
+            </div>
+        </div>
         <button class="restart-btn" onclick="typingTest.restart()">Try Again</button>
     </div>
 
@@ -229,120 +403,127 @@
             constructor() {
                 this.words = [];
                 this.currentWordIndex = 0;
-                this.currentLetterIndex = 0;
-                this.correctLetters = 0;
-                this.totalLetters = 0;
+                this.currentInput = '';
                 this.isActive = false;
                 this.timeLeft = 30;
-                
-                this.initializeElements();
-                this.loadWords();
+                this.correctChars = 0;
+                this.totalChars = 0;
+                this.initElements();
+                this.initWords();
                 this.bindEvents();
-                this.generateTest();
             }
 
-            initializeElements() {
-                this.wordsContainer = document.getElementById('words');
+            initElements() {
+                this.wordsElement = document.getElementById('words');
                 this.wpmElement = document.getElementById('wpm');
                 this.accuracyElement = document.getElementById('accuracy');
                 this.timerElement = document.getElementById('timer');
-                this.cursor = document.getElementById('cursor');
+                this.restartButton = document.getElementById('restart');
                 this.resultModal = document.getElementById('resultModal');
                 this.overlay = document.getElementById('overlay');
             }
 
-            loadWords() {
-                // Extended word list
-                this.wordList = [
+            initWords() {
+                const wordList = [
                     "the", "be", "to", "of", "and", "a", "in", "that", "have", "I",
                     "it", "for", "not", "on", "with", "he", "as", "you", "do", "at",
                     "this", "but", "his", "by", "from", "they", "we", "say", "her", "she",
                     "or", "an", "will", "my", "one", "all", "would", "there", "their", "what",
-                    "so", "up", "out", "if", "about", "who", "get", "which", "go", "me"
+                    "so", "up", "out", "if", "about", "who", "get", "which", "go", "me",
+                    "when", "make", "can", "like", "time", "no", "just", "him", "know", "take"
                 ];
+
+                // Generate 50 random words
+                this.words = Array.from({ length: 50 }, () =>
+                    wordList[Math.floor(Math.random() * wordList.length)]
+                );
+                this.renderWords();
             }
 
-            generateTest() {
-                this.words = [];
-                this.wordsContainer.innerHTML = '';
-                
-                // Generate random words
-                for (let i = 0; i < 50; i++) {
-                    const randomWord = this.wordList[Math.floor(Math.random() * this.wordList.length)];
-                    this.words.push(randomWord);
-                    
+            renderWords() {
+                this.wordsElement.innerHTML = '';
+                this.words.forEach((word, wordIndex) => {
                     const wordElement = document.createElement('div');
-                    wordElement.className = 'word';
-                    
-                    // Create spans for each letter
-                    [...randomWord].forEach(letter => {
-                        const letterSpan = document.createElement('span');
-                        letterSpan.className = 'letter';
-                        letterSpan.textContent = letter;
-                        wordElement.appendChild(letterSpan);
+                    wordElement.className = `word ${wordIndex === this.currentWordIndex ? 'active' : ''}`;
+
+                    [...word].forEach((letter, letterIndex) => {
+                        const letterElement = document.createElement('span');
+                        letterElement.className = 'letter';
+                        letterElement.textContent = letter;
+
+                        if (wordIndex === this.currentWordIndex) {
+                            if (letterIndex < this.currentInput.length) {
+                                const isCorrect = letter === this.currentInput[letterIndex];
+                                letterElement.classList.add(isCorrect ? 'correct' : 'incorrect');
+                            }
+                            if (letterIndex === this.currentInput.length) {
+                                letterElement.classList.add('current');
+                            }
+                        }
+
+                        wordElement.appendChild(letterElement);
                     });
-                    
-                    this.wordsContainer.appendChild(wordElement);
-                }
 
-                this.updateCursor();
-            }
+                    this.wordsElement.appendChild(wordElement);
+                });
 
-            updateCursor() {
-                const currentWord = this.wordsContainer.children[this.currentWordIndex];
-                if (currentWord) {
-                    const letters = currentWord.children;
-                    if (letters[this.currentLetterIndex]) {
-                        const letter = letters[this.currentLetterIndex];
-                        const rect = letter.getBoundingClientRect();
-                        const containerRect = this.wordsContainer.getBoundingClientRect();
-                        
-                        this.cursor.style.left = `${rect.left - containerRect.left}px`;
-                        this.cursor.style.top = `${rect.top - containerRect.top}px`;
+                // Scroll into view if needed
+                const activeWord = this.wordsElement.children[this.currentWordIndex];
+                if (activeWord) {
+                    const container = this.wordsElement;
+                    const scrollAmount = activeWord.offsetTop - container.scrollTop;
+                    if (scrollAmount < 0 || scrollAmount > container.clientHeight - 50) {
+                        container.scrollTop = activeWord.offsetTop - 50;
                     }
                 }
             }
 
-            checkLetter(key) {
-                const currentWord = this.wordsContainer.children[this.currentWordIndex];
-                if (!currentWord) return;
-
-                const letters = currentWord.children;
-                if (this.currentLetterIndex < letters.length) {
-                    const currentLetter = letters[this.currentLetterIndex];
-                    const isCorrect = key === currentLetter.textContent;
-                    
-                    currentLetter.classList.add(isCorrect ? 'correct' : 'incorrect');
-                    this.currentLetterIndex++;
-                    this.totalLetters++;
-                    if (isCorrect) this.correctLetters++;
-                    
-                    this.updateStats();
-                    this.updateCursor();
+            handleInput(key) {
+                if (!this.isActive) {
+                    this.startTest();
                 }
 
-                // Move to next word if space is pressed and we're at the end of the word
-                if (key === ' ' && this.currentLetterIndex >= letters.length) {
-                    this.currentWordIndex++;
-                    this.currentLetterIndex = 0;
-                    this.updateCursor();
+                if (key === ' ') {
+                    this.checkWord();
+                } else if (key === 'Backspace') {
+                    this.currentInput = this.currentInput.slice(0, -1);
+                } else if (key.length === 1) {
+                    this.currentInput += key;
+                }
+
+                this.renderWords();
+                this.updateStats();
+            }
+
+            checkWord() {
+                const currentWord = this.words[this.currentWordIndex];
+                if (this.currentInput.trim() === currentWord) {
+                    this.correctChars += currentWord.length;
+                }
+                this.totalChars += currentWord.length;
+
+                this.currentWordIndex++;
+                this.currentInput = '';
+
+                if (this.currentWordIndex >= this.words.length) {
+                    this.endTest();
                 }
             }
 
             updateStats() {
-                const timeElapsed = (30 - this.timeLeft) / 60;
-                const wpm = Math.round((this.correctLetters / 5) / timeElapsed) || 0;
-                const accuracy = Math.round((this.correctLetters / this.totalLetters) * 100) || 100;
+                const timeElapsed = (30 - this.timeLeft) / 60; // Convert to minutes
+                const wpm = Math.round((this.correctChars / 5) / timeElapsed) || 0;
+                const accuracy = Math.round((this.correctChars / this.totalChars) * 100) || 100;
 
                 this.wpmElement.textContent = wpm;
                 this.accuracyElement.textContent = accuracy;
             }
 
-            startTimer() {
+            startTest() {
+                this.isActive = true;
                 this.timerInterval = setInterval(() => {
                     this.timeLeft--;
                     this.timerElement.textContent = this.timeLeft;
-                    
                     if (this.timeLeft <= 0) {
                         this.endTest();
                     }
@@ -356,53 +537,61 @@
             }
 
             showResults() {
-                const finalWpm = this.wpmElement.textContent;
-                const finalAccuracy = this.accuracyElement.textContent;
-                
-                this.resultModal.querySelector('.final-stats').innerHTML = `
-                    <h3>WPM: ${finalWpm}</h3>
-                    <h3>Accuracy: ${finalAccuracy}%</h3>
-                `;
-                
+                document.getElementById('finalWpm').textContent = this.wpmElement.textContent;
+                document.getElementById('finalAccuracy').textContent = this.accuracyElement.textContent + '%';
+                document.getElementById('finalChars').textContent = this.correctChars;
+                document.getElementById('finalTime').textContent = '30s';
+
                 this.resultModal.classList.add('active');
                 this.overlay.classList.add('active');
             }
 
             restart() {
                 this.currentWordIndex = 0;
-                this.currentLetterIndex = 0;
-                this.correctLetters = 0;
-                this.totalLetters = 0;
-                this.timeLeft = 30;
+                this.currentInput = '';
                 this.isActive = false;
-                
+                this.timeLeft = 30;
+                this.correctChars = 0;
+                this.totalChars = 0;
+
                 clearInterval(this.timerInterval);
-                this.timerElement.textContent = this.timeLeft;
+                this.timerElement.textContent = '30';
                 this.wpmElement.textContent = '0';
                 this.accuracyElement.textContent = '100';
-                
+
                 this.resultModal.classList.remove('active');
                 this.overlay.classList.remove('active');
-                
-                this.generateTest();
+
+                this.initWords();
             }
 
             bindEvents() {
                 document.addEventListener('keydown', (e) => {
-                    if (!this.isActive && e.key.length === 1) {
-                        this.isActive = true;
-                        this.startTimer();
-                    }
-
-                    if (this.isActive && !e.ctrlKey && !e.altKey) {
-                        if (e.key.length === 1 || e.key === ' ') {
-                            e.preventDefault();
-                            this.checkLetter(e.key);
-                        }
+                    if (e.ctrlKey || e.altKey) return;
+                    if (e.key === ' ') e.preventDefault();
+                    if (this.timeLeft > 0) {
+                        this.handleInput(e.key);
                     }
                 });
 
-                document.getElementById('restart').addEventListener('click', () => this.restart());
+                this.restartButton.addEventListener('click', () => this.restart());
+
+                // Theme handling
+                document.querySelectorAll('.theme-option').forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        const theme = e.target.dataset.theme;
+                        document.body.className = `theme-${theme}`;
+                    });
+                });
+
+                // Time selection
+                document.getElementById('timeSelect').addEventListener('click', () => {
+                    const times = [30, 60, 120];
+                    const currentIndex = times.indexOf(this.timeLeft);
+                    this.timeLeft = times[(currentIndex + 1) % times.length];
+                    this.timerElement.textContent = this.timeLeft;
+                    document.getElementById('timeSelect').textContent = `Time: ${this.timeLeft}s`;
+                });
             }
         }
 
@@ -410,4 +599,210 @@
         const typingTest = new TypingTest();
     </script>
 </body>
+
+</html>
+
+
+<script>
+    class TypingTest {
+        constructor() {
+            this.words = [];
+            this.currentWordIndex = 0;
+            this.currentInput = '';
+            this.isActive = false;
+            this.timeLeft = 30;
+            this.correctChars = 0;
+            this.totalChars = 0;
+            this.initElements();
+            this.initWords();
+            this.bindEvents();
+        }
+
+        initElements() {
+            this.wordsElement = document.getElementById('words');
+            this.wpmElement = document.getElementById('wpm');
+            this.accuracyElement = document.getElementById('accuracy');
+            this.timerElement = document.getElementById('timer');
+            this.restartButton = document.getElementById('restart');
+            this.resultModal = document.getElementById('resultModal');
+            this.overlay = document.getElementById('overlay');
+        }
+
+        initWords() {
+            const wordList = [
+                "the", "be", "to", "of", "and", "a", "in", "that", "have", "I",
+                "it", "for", "not", "on", "with", "he", "as", "you", "do", "at",
+                "this", "but", "his", "by", "from", "they", "we", "say", "her", "she",
+                "or", "an", "will", "my", "one", "all", "would", "there", "their", "what",
+                "so", "up", "out", "if", "about", "who", "get", "which", "go", "me",
+                "when", "make", "can", "like", "time", "no", "just", "him", "know", "take"
+            ];
+
+            // Generate 50 random words
+            this.words = Array.from({ length: 50 }, () =>
+                wordList[Math.floor(Math.random() * wordList.length)]
+            );
+            this.renderWords();
+        }
+
+        renderWords() {
+            this.wordsElement.innerHTML = '';
+            this.words.forEach((word, wordIndex) => {
+                const wordElement = document.createElement('div');
+                wordElement.className = `word ${wordIndex === this.currentWordIndex ? 'active' : ''}`;
+
+                [...word].forEach((letter, letterIndex) => {
+                    const letterElement = document.createElement('span');
+                    letterElement.className = 'letter';
+                    letterElement.textContent = letter;
+
+                    if (wordIndex === this.currentWordIndex) {
+                        if (letterIndex < this.currentInput.length) {
+                            const isCorrect = letter === this.currentInput[letterIndex];
+                            letterElement.classList.add(isCorrect ? 'correct' : 'incorrect');
+                        }
+                        if (letterIndex === this.currentInput.length) {
+                            letterElement.classList.add('current');
+                        }
+                    }
+
+                    wordElement.appendChild(letterElement);
+                });
+
+                this.wordsElement.appendChild(wordElement);
+            });
+
+            // Scroll into view if needed
+            const activeWord = this.wordsElement.children[this.currentWordIndex];
+            if (activeWord) {
+                const container = this.wordsElement;
+                const scrollAmount = activeWord.offsetTop - container.scrollTop;
+                if (scrollAmount < 0 || scrollAmount > container.clientHeight - 50) {
+                    container.scrollTop = activeWord.offsetTop - 50;
+                }
+            }
+        }
+
+        handleInput(key) {
+            if (!this.isActive) {
+                this.startTest();
+            }
+
+            if (key === ' ') {
+                this.checkWord();
+            } else if (key === 'Backspace') {
+                this.currentInput = this.currentInput.slice(0, -1);
+            } else if (key.length === 1) {
+                this.currentInput += key;
+            }
+
+            this.renderWords();
+            this.updateStats();
+        }
+
+        checkWord() {
+            const currentWord = this.words[this.currentWordIndex];
+            if (this.currentInput.trim() === currentWord) {
+                this.correctChars += currentWord.length;
+            }
+            this.totalChars += currentWord.length;
+
+            this.currentWordIndex++;
+            this.currentInput = '';
+
+            if (this.currentWordIndex >= this.words.length) {
+                this.endTest();
+            }
+        }
+
+        updateStats() {
+            const timeElapsed = (30 - this.timeLeft) / 60; // Convert to minutes
+            const wpm = Math.round((this.correctChars / 5) / timeElapsed) || 0;
+            const accuracy = Math.round((this.correctChars / this.totalChars) * 100) || 100;
+
+            this.wpmElement.textContent = wpm;
+            this.accuracyElement.textContent = accuracy;
+        }
+
+        startTest() {
+            this.isActive = true;
+            this.timerInterval = setInterval(() => {
+                this.timeLeft--;
+                this.timerElement.textContent = this.timeLeft;
+                if (this.timeLeft <= 0) {
+                    this.endTest();
+                }
+            }, 1000);
+        }
+
+        endTest() {
+            clearInterval(this.timerInterval);
+            this.isActive = false;
+            this.showResults();
+        }
+
+        showResults() {
+            document.getElementById('finalWpm').textContent = this.wpmElement.textContent;
+            document.getElementById('finalAccuracy').textContent = this.accuracyElement.textContent + '%';
+            document.getElementById('finalChars').textContent = this.correctChars;
+            document.getElementById('finalTime').textContent = '30s';
+
+            this.resultModal.classList.add('active');
+            this.overlay.classList.add('active');
+        }
+
+        restart() {
+            this.currentWordIndex = 0;
+            this.currentInput = '';
+            this.isActive = false;
+            this.timeLeft = 30;
+            this.correctChars = 0;
+            this.totalChars = 0;
+
+            clearInterval(this.timerInterval);
+            this.timerElement.textContent = '30';
+            this.wpmElement.textContent = '0';
+            this.accuracyElement.textContent = '100';
+
+            this.resultModal.classList.remove('active');
+            this.overlay.classList.remove('active');
+
+            this.initWords();
+        }
+
+        bindEvents() {
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey || e.altKey) return;
+                if (e.key === ' ') e.preventDefault();
+                if (this.timeLeft > 0) {
+                    this.handleInput(e.key);
+                }
+            });
+
+            this.restartButton.addEventListener('click', () => this.restart());
+
+            // Theme handling
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.addEventListener('click', (e) => {
+                    const theme = e.target.dataset.theme;
+                    document.body.className = `theme-${theme}`;
+                });
+            });
+
+            // Time selection
+            document.getElementById('timeSelect').addEventListener('click', () => {
+                const times = [30, 60, 120];
+                const currentIndex = times.indexOf(this.timeLeft);
+                this.timeLeft = times[(currentIndex + 1) % times.length];
+                this.timerElement.textContent = this.timeLeft;
+                document.getElementById('timeSelect').textContent = `Time: ${this.timeLeft}s`;
+            });
+        }
+    }
+
+    // Initialize the typing test
+    const typingTest = new TypingTest();
+</script>
+</body>
+
 </html>

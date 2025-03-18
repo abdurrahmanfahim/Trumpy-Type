@@ -1,0 +1,337 @@
+[
+  {
+    "database": "islamic_quotes",
+    "collection": "Hadiths",
+    "documents": [
+      {
+        "hadith": "Actions are judged by intentions. If your intention is for Allah alone, your deeds will be rewarded. Always purify your intentions.",
+        "source": "Bukhari, Muslim"
+      },
+      {
+        "hadith": "The best among you are those who have the best manners and character, for it leads to goodness in life and success in the Hereafter.",
+        "source": "Bukhari"
+      },
+      {
+        "hadith": "Smiling at your brother is an act of charity. A simple smile costs nothing but carries great reward with Allah and spreads positivity.",
+        "source": "Tirmidhi"
+      },
+      {
+        "hadith": "The strong one is not the one who defeats others, but the one who controls his anger, acts with patience, and remains just in all matters.",
+        "source": "Bukhari, Muslim"
+      },
+      {
+        "hadith": "Be merciful to others, and Allah will show mercy to you. Treat people with kindness, and that kindness will return to you in many ways.",
+        "source": "Tirmidhi"
+      },
+      {
+        "hadith": "Whoever believes in Allah and the Last Day should speak good or remain silent, for words have great power and should be used wisely.",
+        "source": "Bukhari, Muslim"
+      },
+      {
+        "hadith": "The best among you are those who learn the Qur'an and teach it to others, for knowledge and sharing it bring immense blessings and reward.",
+        "source": "Bukhari"
+      },
+      {
+        "hadith": "A father gives his child nothing better than good manners. Teach your children kindness, respect, and patience for a prosperous life.",
+        "source": "Tirmidhi"
+      },
+      {
+        "hadith": "Make things easy, not difficult. Help others, do not burden them, and bring comfort and relief to people's lives whenever possible.",
+        "source": "Bukhari"
+      },
+      {
+        "hadith": "Seeking knowledge is an obligation for every Muslim, male and female. Strive to learn, for knowledge will guide you in this life and beyond.",
+        "source": "Ibn Majah"
+      },
+      {
+        "hadith": "The believer is the one who is loved by others due to his good character and kindness, which attract people to the path of righteousness.",
+        "source": "Bukhari"
+      },
+      {
+        "hadith": "Whoever helps a fellow believer in their time of need, Allah will help him in this life and in the Hereafter, granting him His mercy.",
+        "source": "Muslim"
+      },
+      {
+        "hadith": "The best charity is that which is given when one is in need. Even a small act of kindness or a sincere smile can be a form of charity.",
+        "source": "Bukhari"
+      },
+      {
+        "hadith": "Take care of your parents with kindness and respect, for they are the gateway to Paradise, and treating them well brings great reward.",
+        "source": "Tirmidhi"
+      },
+      {
+        "hadith": "Do not be angry. Anger leads to harm, while patience and forgiveness lead to peace, strengthening relationships and bringing tranquility.",
+        "source": "Bukhari"
+      },
+      {
+        "hadith": "Whoever performs Wudu and does it well, his sins are forgiven, and his reward is written in the record of deeds as purification of the soul.",
+        "source": "Muslim"
+      },
+      {
+        "hadith": "The world is a prison for the believer and a paradise for the disbeliever. Be patient in this world and strive for the eternal Hereafter.",
+        "source": "Muslim"
+      },
+      {
+        "hadith": "When a person dies, his deeds stop except for three: ongoing charity, knowledge that benefits others, and a righteous child who prays.",
+        "source": "Muslim"
+      },
+      {
+        "hadith": "Whoever is not thankful to people is not thankful to Allah. Gratitude is an essential part of faith and leads to increased blessings.",
+        "source": "Abu Dawood"
+      },
+      {
+        "hadith": "Praying at night brings closeness to Allah, strengthening your relationship with Him. It is a source of peace and great spiritual benefit.",
+        "source": "Bukhari"
+      }
+    ]
+  },
+
+  {
+    "database": "programming_practice",
+    "collection": "typing_exercises",
+    "documents": [
+      {
+        "category": "JavaScript Keywords",
+        "text": "const let var function return if else while for break continue class import export default",
+        "difficulty": "beginner"
+      },
+      {
+        "category": "Common Code Patterns",
+        "text": "for (let i = 0; i < array.length; i++) { console.log(array[i]); }",
+        "difficulty": "intermediate"
+      },
+      {
+        "category": "Array Methods",
+        "text": "array.map(item => item * 2); array.filter(item => item > 0); array.reduce((acc, curr) => acc + curr, 0);",
+        "difficulty": "intermediate"
+      },
+      {
+        "category": "Function Declarations",
+        "text": "function calculateSum(a, b) { return a + b; } const multiply = (x, y) => x * y;",
+        "difficulty": "beginner"
+      },
+      {
+        "category": "Object Operations",
+        "text": "const user = { name: 'John', age: 25 }; const { name, age } = user; Object.keys(user).forEach(key => console.log(key));",
+        "difficulty": "intermediate"
+      },
+      {
+        "category": "Promise Syntax",
+        "text": "new Promise((resolve, reject) => { if (success) { resolve(data); } else { reject(error); } })",
+        "difficulty": "advanced"
+      },
+      {
+        "category": "Try-Catch Blocks",
+        "text": "try { await fetchData(); } catch (error) { console.error('Error:', error.message); }",
+        "difficulty": "intermediate"
+      },
+      {
+        "category": "HTML Elements",
+        "text": "<div class='container'><h1>Title</h1><p>Content</p><button onclick='handleClick()'>Click</button></div>",
+        "difficulty": "beginner"
+      },
+      {
+        "category": "CSS Properties",
+        "text": "display: flex; justify-content: center; align-items: center; margin: 0 auto; padding: 20px; border-radius: 8px;",
+        "difficulty": "beginner"
+      },
+      {
+        "category": "SQL Queries",
+        "text": "SELECT * FROM users WHERE age > 18 ORDER BY name ASC; INSERT INTO products (name, price) VALUES ('Phone', 599);",
+        "difficulty": "intermediate"
+      },
+
+      {
+        "category": "JavaScript Keywords",
+        "text": "const let var function return if else while for break continue class import export default",
+        "difficulty": "beginner"
+      },
+      {
+        "category": "Common Code Patterns",
+        "text": "for (let i = 0; i < array.length; i++) { console.log(array[i]); }",
+        "difficulty": "intermediate"
+      },
+      {
+        "category": "Array Methods",
+        "text": "array.map(item => item * 2); array.filter(item => item > 0); array.reduce((acc, curr) => acc + curr, 0);",
+        "difficulty": "intermediate"
+      },
+      {
+        "category": "React Hooks",
+        "text": "const [state, setState] = useState(initialState); useEffect(() => { /* effect */ }, [dependency]);",
+        "difficulty": "intermediate"
+      },
+      {
+        "category": "MongoDB Queries",
+        "text": "db.collection.find({ age: { $gt: 18 } }); db.users.aggregate([{ $match: { status: 'active' } }]);",
+        "difficulty": "advanced"
+      },
+      {
+        "category": "Git Commands",
+        "text": "git add . && git commit -m 'feat: new feature' && git push origin main && git checkout -b feature/new-branch",
+        "difficulty": "intermediate"
+      },
+      {
+        "category": "Python Syntax",
+        "text": "def calculate_average(numbers): return sum(numbers) / len(numbers) if numbers else 0",
+        "difficulty": "beginner"
+      },
+      {
+        "category": "Regular Expressions",
+        "text": "const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,6}$/;",
+        "difficulty": "advanced"
+      },
+      {
+        "category": "TypeScript Types",
+        "text": "interface User { id: number; name: string; age?: number; roles: string[]; }",
+        "difficulty": "intermediate"
+      },
+      {
+        "category": "Node.js Express",
+        "text": "app.get('/api/users', async (req, res) => { try { const users = await User.find(); res.json(users); } catch (err) { res.status(500).json(err); } });",
+        "difficulty": "advanced"
+      },
+      {
+        "category": "CSS Flexbox",
+        "text": ".container { display: flex; flex-direction: column; justify-content: space-between; align-items: center; gap: 1rem; }",
+        "difficulty": "beginner"
+      },
+      {
+        "category": "CSS Grid",
+        "text": ".grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); grid-gap: 20px; }",
+        "difficulty": "intermediate"
+      },
+      {
+        "category": "React Components",
+        "text": "const Button = ({ onClick, children }) => <button className='btn' onClick={onClick}>{children}</button>;",
+        "difficulty": "intermediate"
+      },
+      {
+        "category": "ES6 Features",
+        "text": "const { name, age, ...rest } = person; const newArray = [...array1, ...array2]; const sum = (...numbers) => numbers.reduce((a, b) => a + b);",
+        "difficulty": "intermediate"
+      },
+      {
+        "category": "Async/Await",
+        "text": "async function fetchUserData() { try { const response = await fetch('/api/users'); return await response.json(); } catch (error) { console.error(error); } }",
+        "difficulty": "advanced"
+      },
+      {
+        "category": "Docker Commands",
+        "text": "docker build -t myapp . && docker run -p 3000:3000 myapp && docker-compose up -d && docker ps",
+        "difficulty": "advanced"
+      },
+      {
+        "category": "SQL Joins",
+        "text": "SELECT users.name, orders.product FROM users INNER JOIN orders ON users.id = orders.user_id WHERE orders.status = 'completed';",
+        "difficulty": "advanced"
+      },
+      {
+        "category": "React Redux",
+        "text": "const mapStateToProps = state => ({ todos: state.todos }); const mapDispatchToProps = dispatch => ({ addTodo: text => dispatch(addTodo(text)) });",
+        "difficulty": "advanced"
+      },
+      {
+        "category": "Jest Testing",
+        "text": "describe('sum function', () => { test('adds 1 + 2 to equal 3', () => { expect(sum(1, 2)).toBe(3); }); });",
+        "difficulty": "intermediate"
+      },
+      {
+        "category": "GraphQL Query",
+        "text": "query GetUser { user(id: \"123\") { id name email posts { title content } } }",
+        "difficulty": "advanced"
+      },
+      {
+        "category": "HTML5 Semantic",
+        "text": "<header><nav><ul><li><a href=\"#home\">Home</a></li></ul></nav></header><main><article><section><h1>Title</h1></section></article></main>",
+        "difficulty": "beginner"
+      },
+      {
+        "category": "NPM Commands",
+        "text": "npm install package-name && npm run build && npm test && npm run start",
+        "difficulty": "beginner"
+      },
+      {
+        "category": "Webpack Config",
+        "text": "module.exports = { entry: './src/index.js', output: { path: path.resolve(__dirname, 'dist'), filename: 'bundle.js' } };",
+        "difficulty": "advanced"
+      },
+      {
+        "category": "Python List Comprehension",
+        "text": "squares = [x**2 for x in range(10) if x % 2 == 0]; names = [name.upper() for name in names if len(name) > 3]",
+        "difficulty": "intermediate"
+      },
+      {
+        "category": "Shell Commands",
+        "text": "ls -la && cd directory && mkdir new-folder && chmod 755 script.sh && ssh user@hostname",
+        "difficulty": "intermediate"
+      }
+    ]
+  },
+  {
+    "database": "motivational_quotes",
+    "collection": "Quotes",
+    "documents": [
+      {
+        "quote": "The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle.",
+        "author": "Steve Jobs"
+      },
+      {
+        "quote": "It does not matter how slowly you go as long as you do not stop. Success is the sum of small efforts, repeated day in and day out.",
+        "author": "Confucius, Robert Collier"
+      },
+      {
+        "quote": "The best way to predict the future is to invent it. Your time is limited, so don't waste it living someone else's life.",
+        "author": "Alan Kay, Steve Jobs"
+      },
+      {
+        "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts. A person who never made a mistake never tried anything new.",
+        "author": "Winston Churchill, Albert Einstein"
+      },
+      {
+        "quote": "First, solve the problem. Then, write the code. Simplicity is the soul of efficiency. Good software, like wine, takes time.",
+        "author": "John Johnson, Austin Freeman"
+      },
+      {
+        "quote": "Learning never exhausts the mind. Knowledge is power. An investment in knowledge pays the best interest.",
+        "author": "Leonardo da Vinci, Francis Bacon, Benjamin Franklin"
+      },
+      {
+        "quote": "Don't let the noise of others' opinions drown out your own inner voice. Stay hungry, stay foolish.",
+        "author": "Steve Jobs"
+      },
+      {
+        "quote": "Code is like humor. When you have to explain it, it’s bad. The function of good software is to make the complex appear to be simple.",
+        "author": "Cory House, Grady Booch"
+      },
+      {
+        "quote": "The difference between ordinary and extraordinary is that little extra. Excellence is not an act, but a habit.",
+        "author": "Jimmy Johnson, Aristotle"
+      },
+      {
+        "quote": "Work hard in silence; let success make the noise. The expert in anything was once a beginner.",
+        "author": "Frank Ocean, Helen Hayes"
+      },
+      {
+        "quote": "You don’t have to be great to start, but you have to start to be great. Growth and comfort do not coexist.",
+        "author": "Zig Ziglar, Ginni Rometty"
+      },
+      {
+        "quote": "The greatest enemy of knowledge is not ignorance; it is the illusion of knowledge. Stay curious, keep learning.",
+        "author": "Stephen Hawking"
+      },
+      {
+        "quote": "Do what you can, with what you have, where you are. Your limitation—it’s only your imagination.",
+        "author": "Theodore Roosevelt"
+      },
+      {
+        "quote": "Failure is simply the opportunity to begin again, this time more intelligently. Experience is the name we give to our mistakes.",
+        "author": "Henry Ford, Oscar Wilde"
+      },
+      {
+        "quote": "Success usually comes to those who are too busy to be looking for it. Don’t be afraid to give up the good to go for the great.",
+        "author": "Henry David Thoreau, John D. Rockefeller"
+      }
+    ]
+  }
+]

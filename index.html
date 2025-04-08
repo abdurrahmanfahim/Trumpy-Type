@@ -2,94 +2,92 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trumpy Type</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Trumpy Type</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
 </head>
 
 <body class="theme-default">
-    <!-- Header Section -->
-    <div class="header">
-        <h1>Trump Type</h1>
-        <div class="settings">
-            <button class="setting-btn" id="timeSelect">Time: 30s</button>
-            <div class="theme-dropdown">
-                <button class="setting-btn" id="modeSelect">Mode: Motivational</button>
-                <div class="theme-options">
-                    <div class="mode-option" data-mode="programming">Programming</div>
-                    <div class="mode-option" data-mode="islamic">Islamic Quotes</div>
-                    <div class="mode-option" data-mode="motivational">Motivational</div>
-                </div>
-            </div>
-            <div class="theme-dropdown">
-                <button class="setting-btn" id="themeSelect">Theme</button>
-                <div class="theme-options">
-                    <div class="theme-option" data-theme="default">Default</div>
-                    <div class="theme-option" data-theme="light">Light</div>
-                    <div class="theme-option" data-theme="matrix">Matrix</div>
-                </div>
-            </div>
+  <!-- Header Section -->
+  <div class="header">
+    <h1>Trumpy Type</h1>
+    <div class="settings">
+      <button class="setting-btn" id="timeSelect">Time: 30s</button>
+      <div class="theme-dropdown">
+        <button class="setting-btn" id="modeSelect">Mode: Motivational</button>
+        <div class="theme-options">
+          <div class="mode-option" data-mode="programming">Programming</div>
+          <div class="mode-option" data-mode="islamic">Islamic Quotes</div>
+          <div class="mode-option" data-mode="motivational">Motivational</div>
         </div>
-    </div>
-
-    <!-- Typing Area -->
-    <div class="type-container">
-        <div class="words" id="words"></div>
-    </div>
-
-    <div class="type-container" id="hiddenContainer">
-        <div class="words" id="words"></div>
-        <input type="text" id="hiddenInput" style="opacity: 0; position: fixed; width: 1px; height: 1px; top: -100px;"
-            autocomplete="off" autocapitalize="off">
-    </div>
-
-
-    <!-- Statistics -->
-    <div class="stats">
-        <div class="stat">
-            <div class="stat-value" id="wpm">0</div>
-            <div class="stat-label">WPM</div>
+      </div>
+      <div class="theme-dropdown">
+        <button class="setting-btn" id="themeSelect">Theme</button>
+        <div class="theme-options">
+          <div class="theme-option" data-theme="default">Default</div>
+          <div class="theme-option" data-theme="light">Light</div>
+          <div class="theme-option" data-theme="matrix">Matrix</div>
         </div>
-        <div class="stat">
-            <div class="stat-value" id="accuracy">100</div>
-            <div class="stat-label">Accuracy</div>
-        </div>
-        <div class="stat">
-            <div class="stat-value" id="timer">30</div>
-            <div class="stat-label">Time</div>
-        </div>
+      </div>
     </div>
+  </div>
 
-    <button class="restart-btn" id="restart">Restart Test</button>
+  <!-- Typing Area -->
+  <div class="type-container">
+    <div class="words" id="words"></div>
+    <input type="text" id="hiddenInput" style="opacity: 0; position: fixed; width: 1px; height: 1px; top: -100px;"
+      autocomplete="off" autocapitalize="off">
+  </div>
 
-    <!-- Results Modal -->
-    <div class="overlay" id="overlay"></div>
-    <div class="result-modal" id="resultModal">
-        <h2>Test Complete!</h2>
-        <div class="final-stats">
-            <div class="final-stat">
-                <h3>WPM</h3>
-                <p id="finalWpm">0</p>
-            </div>
-            <div class="final-stat">
-                <h3>Accuracy</h3>
-                <p id="finalAccuracy">0%</p>
-            </div>
-            <div class="final-stat">
-                <h3>Characters</h3>
-                <p id="finalChars">0</p>
-            </div>
-            <div class="final-stat">
-                <h3>Time</h3>
-                <p id="finalTime">30s</p>
-            </div>
-        </div>
-        <button class="restart-btn" onclick="typingTest.restart()">Try Again</button>
+
+
+  <!-- Statistics -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-value" id="wpm">0</div>
+      <div class="stat-label">WPM</div>
     </div>
-    <script src="./js/script.js"></script>
+    <div class="stat">
+      <div class="stat-value" id="accuracy">100</div>
+      <div class="stat-label">Accuracy</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="timer">30</div>
+      <div class="stat-label">Time</div>
+    </div>
+  </div>
+
+  <button class="restart-btn" id="restart">Restart Test</button>
+
+  <!-- Results Modal -->
+  <div class="overlay" id="overlay"></div>
+  <div class="result-modal" id="resultModal">
+    <h2>Test Complete!</h2>
+    <div class="final-stats">
+      <div class="final-stat">
+        <h3>WPM</h3>
+        <p id="finalWpm">0</p>
+      </div>
+      <div class="final-stat">
+        <h3>Accuracy</h3>
+        <p id="finalAccuracy">0%</p>
+      </div>
+      <div class="final-stat">
+        <h3>Characters</h3>
+        <p id="finalChars">0</p>
+      </div>
+      <div class="final-stat">
+        <h3>Time</h3>
+        <p id="finalTime">30s</p>
+      </div>
+    </div>
+    <button class="restart-btn" onclick="typingTest.restart()">Try Again</button>
+  </div>
+  <script src="./js/script.js"></script>
 </body>
 
 </html>

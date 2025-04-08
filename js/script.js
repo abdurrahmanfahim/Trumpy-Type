@@ -9,7 +9,7 @@ class TypingTest {
     this.initialTime = 30; // Store initial time setting
     this.correctChars = 0;
     this.totalChars = 0;
-    this.mode = "programming"; // Default mode
+    this.mode = "motivational"; // Default mode
     this.canEditPrevious = true;
     this.currentText = "";
 
@@ -292,43 +292,52 @@ class TypingTest {
 
   bindEvents() {
     document.addEventListener("keydown", (e) => {
-      if (e.ctrlKey || e.altKey) return;
-      if (e.key === " ") e.preventDefault();
-      if (this.timeLeft > 0) {
-        this.handleInput(e.key);
-      }
+        // Add Enter key handler for reset
+        if (e.key === "Enter" && this.resultModal.classList.contains("active")) {
+            this.restart();
+            return;
+        }
+
+        // Existing keydown logic
+        if (e.ctrlKey || e.altKey) return;
+        if (e.key === " ") e.preventDefault();
+        if (this.timeLeft > 0) {
+            this.handleInput(e.key);
+        }
     });
 
+    // Rest of the bindEvents method remains the same...
     this.restartButton.addEventListener("click", () => this.restart());
 
     // Theme handling
     document.querySelectorAll(".theme-option").forEach((option) => {
-      option.addEventListener("click", (e) => {
-        const theme = e.target.dataset.theme;
-        document.body.className = `theme-${theme}`;
-      });
+        option.addEventListener("click", (e) => {
+            const theme = e.target.dataset.theme;
+            document.body.className = `theme-${theme}`;
+        });
     });
 
     // Mode selection handling
     document.querySelectorAll(".mode-option").forEach((option) => {
-      option.addEventListener("click", (e) => {
-        const mode = e.target.dataset.mode;
-        this.setMode(mode);
-      });
+        option.addEventListener("click", (e) => {
+            const mode = e.target.dataset.mode;
+            this.setMode(mode);
+        });
     });
 
     // Time selection
     document.getElementById("timeSelect").addEventListener("click", () => {
-      const times = [30, 60, 120];
-      const currentIndex = times.indexOf(this.timeLeft);
-      this.timeLeft = times[(currentIndex + 1) % times.length];
-      this.initialTime = this.timeLeft; // Update initial time
-      this.timerElement.textContent = this.timeLeft;
-      document.getElementById(
-        "timeSelect"
-      ).textContent = `Time: ${this.timeLeft}s`;
+        const times = [30, 60, 120];
+        const currentIndex = times.indexOf(this.timeLeft);
+        this.timeLeft = times[(currentIndex + 1) % times.length];
+        this.initialTime = this.timeLeft; // Update initial time
+        this.timerElement.textContent = this.timeLeft;
+        document.getElementById(
+            "timeSelect"
+        ).textContent = `Time: ${this.timeLeft}s`;
     });
-  }
+}
+
 }
 
 // Initialize the typing test

@@ -53,6 +53,7 @@ class TypingTest {
 
   initElements() {
     this.wordsElement = document.getElementById("words");
+    this.wordsElement.setAttribute('inputmode', 'text'); // Add this line for mobile keyboard
     this.wpmElement = document.getElementById("wpm");
     this.accuracyElement = document.getElementById("accuracy");
     this.timerElement = document.getElementById("timer");
@@ -306,7 +307,6 @@ class TypingTest {
         }
     });
 
-    // Rest of the bindEvents method remains the same...
     this.restartButton.addEventListener("click", () => this.restart());
 
     // Theme handling
@@ -336,8 +336,7 @@ class TypingTest {
             "timeSelect"
         ).textContent = `Time: ${this.timeLeft}s`;
     });
-}
-
+  }
 }
 
 // Initialize the typing test

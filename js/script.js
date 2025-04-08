@@ -53,7 +53,12 @@ class TypingTest {
 
   initElements() {
     this.wordsElement = document.getElementById("words");
-    this.wordsElement.setAttribute('inputmode', 'text'); // Add this line for mobile keyboard
+    this.wordsElement.setAttribute('inputmode', 'text');
+    this.wordsElement.setAttribute('contenteditable', 'true');
+    // Add these lines for auto-focus
+    this.wordsElement.focus();
+    document.addEventListener('click', () => this.wordsElement.focus());
+    
     this.wpmElement = document.getElementById("wpm");
     this.accuracyElement = document.getElementById("accuracy");
     this.timerElement = document.getElementById("timer");
@@ -61,6 +66,7 @@ class TypingTest {
     this.resultModal = document.getElementById("resultModal");
     this.overlay = document.getElementById("overlay");
   }
+
 
   initWords() {
     let content;

@@ -37,8 +37,15 @@
 
     <!-- Typing Area -->
     <div class="type-container">
-        <div class="words" id="words" inputmode="text" contenteditable="true"></div>
+        <div class="words" id="words"></div>
     </div>
+
+    <div class="type-container" id="hiddenContainer">
+        <div class="words" id="words"></div>
+        <input type="text" id="hiddenInput" style="opacity: 0; position: fixed; width: 1px; height: 1px; top: -100px;"
+            autocomplete="off" autocapitalize="off">
+    </div>
+
 
     <!-- Statistics -->
     <div class="stats">

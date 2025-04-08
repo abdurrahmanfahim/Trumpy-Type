@@ -53,11 +53,9 @@ class TypingTest {
 
   initElements() {
     this.wordsElement = document.getElementById("words");
-    this.wordsElement.setAttribute('inputmode', 'text');
-    this.wordsElement.setAttribute('contenteditable', 'true');
-    // Add these lines for auto-focus
-    this.wordsElement.focus();
-    document.addEventListener('click', () => this.wordsElement.focus());
+    this.hiddenInput = document.getElementById("hiddenInput");
+    // Auto-focus the hidden input
+    this.hiddenInput.focus();
     
     this.wpmElement = document.getElementById("wpm");
     this.accuracyElement = document.getElementById("accuracy");
@@ -65,7 +63,8 @@ class TypingTest {
     this.restartButton = document.getElementById("restart");
     this.resultModal = document.getElementById("resultModal");
     this.overlay = document.getElementById("overlay");
-  }
+}
+
 
 
   initWords() {
@@ -298,21 +297,31 @@ class TypingTest {
   }
 
   bindEvents() {
-    document.addEventListener("keydown", (e) => {
-        // Add Enter key handler for reset
-        if (e.key === "Enter" && this.resultModal.classList.contains("active")) {
-            this.restart();
-            return;
-        }
-
-        // Existing keydown logic
-        if (e.ctrlKey || e.altKey) return;
-        if (e.key === " ") e.preventDefault();
+    // Handle mobile input
+    this.hiddenInput.addEventListener('input', (e) => {
         if (this.timeLeft > 0) {
-            this.handleInput(e.key);
+            this.handleInput(e.data);
+        }
+        this.hiddenInput.value = ''; // Clear the input after handling
+    });
+
+    // Handle backspace and other special keys
+    this.hiddenInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace') {
+            e.preventDefault();
+            this.handleInput('Backspace');
+        }
+        if (e.key === 'Enter' && this.resultModal.classList.contains('active')) {
+            this.restart();
         }
     });
 
+    // Refocus hidden input when clicking anywhere
+    document.addEventListener('click', () => {
+        this.hiddenInput.focus();
+    });
+
+    // Your existing event listeners...
     this.restartButton.addEventListener("click", () => this.restart());
 
     // Theme handling
@@ -336,13 +345,11 @@ class TypingTest {
         const times = [30, 60, 120];
         const currentIndex = times.indexOf(this.timeLeft);
         this.timeLeft = times[(currentIndex + 1) % times.length];
-        this.initialTime = this.timeLeft; // Update initial time
+        this.initialTime = this.timeLeft;
         this.timerElement.textContent = this.timeLeft;
-        document.getElementById(
-            "timeSelect"
-        ).textContent = `Time: ${this.timeLeft}s`;
+        document.getElementById("timeSelect").textContent = `Time: ${this.timeLeft}s`;
     });
-  }
+}
 }
 
 // Initialize the typing test
